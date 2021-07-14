@@ -5,7 +5,6 @@ $searchQuery = $_GET['searchQuery'];
 $query = "SELECT * FROM items WHERE name LIKE '%$searchQuery%'";
 $db = new DataBase($config);
 $arItems = $db::getRows($query);
-$arItems = $db::getRows($query);
 ?>
 
 <!DOCTYPE html>
