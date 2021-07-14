@@ -1,8 +1,10 @@
 <?php
+require_once('./config/database.php');
 require_once('./DataBase.php');
 
 $query = 'SELECT * FROM items';
-$arItems = DataBase::getRows($query);
+$db = new DataBase($config);
+$arItems = $db::getRows($query);
 
 ?>
 

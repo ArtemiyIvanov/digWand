@@ -1,9 +1,11 @@
 <?php
-
+require_once('./config/database.php');
 require_once('./DataBase.php');
 $searchQuery = $_GET['searchQuery'];
 $query = "SELECT * FROM items WHERE name LIKE '%$searchQuery%'";
-$arItems = DataBase::getRows($query);
+$db = new DataBase($config);
+$arItems = $db::getRows($query);
+$arItems = $db::getRows($query);
 ?>
 
 <!DOCTYPE html>
