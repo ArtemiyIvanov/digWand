@@ -1,6 +1,6 @@
 <?php
 
-require_once('./config/database.php');
+require_once('../config/database.php');
 
 // $connect = mysqli_connect(DB_HOST.':'.DB_PORT, DB_USER, DB_PW, DB_NAME);
 
