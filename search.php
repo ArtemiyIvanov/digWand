@@ -1,9 +1,9 @@
 <?php
+
 require_once('./DataBase.php');
-
-$query = 'SELECT * FROM items';
+$searchQuery = $_GET['searchQuery'];
+$query = "SELECT * FROM items WHERE name LIKE '%$searchQuery%'";
 $arItems = DataBase::getRows($query);
-
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ $arItems = DataBase::getRows($query);
 
 <body>
     <header>
-        <div class="logo"><a href="./index.php">E-shop</a></div>
+      <div class="logo"><a href="./index.php">E-shop</a></div>
         <div class="cart">
             <form action="/search.php" class="search-form">
                 <input type="text" class="search-field" name ="searchQuery"  required="required">
@@ -31,6 +31,10 @@ $arItems = DataBase::getRows($query);
         </div>
     </header>
     <main>
+        <?php if (empty($arItems)) : ?>
+            <h4>По запросу "<?=$searchQuery?>" ничего не найдено :(</h4>
+        <?php endif ?>
+
         <?php foreach ($arItems as $item) : ?>
 
             <div class="product-item" data-id="<?= $item['id'] ?>">
@@ -43,8 +47,6 @@ $arItems = DataBase::getRows($query);
             </div>
 
         <?php endforeach; ?>
-
-        <div class="products"></div>
     </main>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
     <script src="js/main.js"></script>
