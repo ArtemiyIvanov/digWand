@@ -2,10 +2,6 @@
 const image = 'https://via.placeholder.com/150';
 const cartImage = 'https://via.placeholder.com/100x80';
 
-const items = ['Notebook', 'Display', 'Keyboard', 'Mouse', 'Phones', 'Router', 'USB-camera', 'Gamepad'];
-const prices = [1000, 200, 20, 10, 25, 30, 18, 24];
-const ids = [1, 2, 3, 4, 5, 6, 7, 8];
-
 //Глобальные сущности 
 var list = fetchData ();
 var userCart = []; //массив добавленных юзером товаров
@@ -32,18 +28,18 @@ document.querySelector ('.cart-block').addEventListener ('click', (evt) => {
 // функция создает массив запуска функции createProduct для каждого товара
 function fetchData () {
 	let arr = [];
-	for (let i = 0; i < items.length; i++) {
-		arr.push (createProduct (i));
-	}
+	items.forEach(item => {
+		arr.push (createProduct (item));
+	});
 	return arr
 }
 
 // функция создания товара(объекта) с соответствующими атрибутами (полями), в т.ч функции создания шаблона верстки
-function createProduct (i) {
+function createProduct (item) {
 	return {
-		id: i,
-		name: items[i],
-		price: prices[i],
+		id: item.id,
+		name: item.name,
+		price: item.price,
 		img: image, //изображение товара
 		quantity: 0, //счетчик количества
 		createTemplate: function () {//шаблон верстки
@@ -64,12 +60,23 @@ function createProduct (i) {
 }
 
 //функция размещения созданных товаров в блоке products
-function renderProducts () {
-	let arr = [];
-	for (item of list) {
-		arr.push (item.createTemplate ())
+function renderProducts (search = false, items = []) {
+	if (!search) {
+		let arr = [];
+		for (item of list) {
+			arr.push (item.createTemplate ())
+		}
+		document.querySelector ('.products').innerHTML = arr.join ();
+	} else {
+		let arr = [];
+		items.forEach((item) => {
+			let prod = createProduct(item);
+			console.log(prod);
+			arr.push(prod.createTemplate());
+		});
+		document.querySelector ('.products').innerHTML = arr.join ();
 	}
-	document.querySelector ('.products').innerHTML = arr.join ();
+	
 }
 
 //вызов функции размещения товаров
