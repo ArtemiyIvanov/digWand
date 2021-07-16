@@ -1,8 +1,6 @@
 <?php
 require './vendor/autoload.php';
 
-var_dump(getenv('DB_CONNECTION'));
-
 use App\Controllers\Controller;
 
 $controller = new Controller;

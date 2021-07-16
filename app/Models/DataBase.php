@@ -6,13 +6,6 @@ use \PDO;
 
 class DataBase {
 
-    const DB_HOST = 'localhost';
-    const DB_PORT = '';
-    const DB_NAME = 'e-shop';
-    const DB_USER = 'homestead';
-    const DB_PASS = 'secret';
-    const DB_CHAR = 'utf8';
-
     protected static $instance = null;
 
     private function __construct() {
@@ -27,9 +20,8 @@ class DataBase {
      */
     private static function instance() {
         $connectionParams = getDbParams();
-
         if (self::$instance === null) {
-            $dsn = 'mysql:host=' . $connectionParams['DB_HOST'] . ';port=' . $connectionParams['DB_PORT'] . ';dbname=' . $connectionParams['DB_NAME'] . ';charset=' . $connectionParams['DB_CHAR'];
+            $dsn = $connectionParams['DB_CONNECTION'] . ':host=' . $connectionParams['DB_HOST'] . ';port=' . $connectionParams['DB_PORT'] . ';dbname=' . $connectionParams['DB_NAME'] . ';charset=' . $connectionParams['DB_CHAR'];
             self::$instance = new PDO($dsn, $connectionParams['DB_USER'], $connectionParams['DB_PASS'], PDO_OPTIONS);
         }
         return self::$instance;
