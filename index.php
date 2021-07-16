@@ -1,8 +1,12 @@
 <?php
-require_once('./DataBase.php');
+require './vendor/autoload.php';
 
-$query = 'SELECT * FROM items';
-$arItems = DataBase::getRows($query);
+var_dump(getenv('DB_CONNECTION'));
+
+use App\Controllers\Controller;
+
+$controller = new Controller;
+$arItems = $controller->index();
 
 ?>
 
