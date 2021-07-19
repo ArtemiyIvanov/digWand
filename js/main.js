@@ -140,7 +140,7 @@ function renderCart() {
                         </div>`
 	}
 	if (allProducts != ''){
-		allProducts += `<form action ="/?c=order" class="order-block"><button class="order-btn">оформить заказ</button></form>`;
+		allProducts += `<form action="/?c=order&a=index" method = "POST", class="order-block"><button class="order-btn">оформить заказ</button></form>`;
 	} 
 	document.querySelector('.cart-block').innerHTML = allProducts;
 }

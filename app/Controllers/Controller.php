@@ -2,8 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Model;
-use Jenssegers\Blade\Blade;
+use App\Models\Model, Jenssegers\Blade\Blade;
 
 class Controller
 {
