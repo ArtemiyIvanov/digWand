@@ -1,8 +1,11 @@
 <?php
 
-const DB_HOST = 'localhost';
-const DB_USER = 'root';
-const DB_PW = '';
-const DB_NAME = 'e-shop';
-const DB_CHAR = 'utf8';
-?>
+return [
+    'DB_CONNECTION' => env('DB_CONNECTION'),
+    'DB_HOST' => env('DB_HOST'),
+    'DB_PORT' => env('DB_PORT'),
+    'DB_USER' => env('DB_USER'),
+    'DB_PASS' => env('DB_PASS'),
+    'DB_NAME' => env('DB_NAME'),
+    'DB_CHAR' => env('DB_CHAR')
+];
