@@ -3,39 +3,41 @@ const image = 'https://via.placeholder.com/150';
 const cartImage = 'https://via.placeholder.com/100x80';
 
 //Глобальные сущности 
-var list = fetchData ();
+var list = fetchData();
 var userCart = []; //массив добавленных юзером товаров
 
 //блок открытой корзины
-document.querySelector ('.btn-cart').addEventListener ('click', () => {
-	document.querySelector ('.cart-block').classList.toggle ('invisible')
-}) 
+document.querySelector('.btn-cart').addEventListener('click', () => {
+	document.querySelector('.cart-block').classList.toggle('invisible')
+})
+
 
 // нажатие кнопки купить
-document.querySelector ('.products').addEventListener ('click', (evt) => {
-	if (evt.target.classList.contains ('buy-btn')) {
-		addProduct (evt.target);
+document.querySelector('.products').addEventListener('click', (evt) => {
+	if (evt.target.classList.contains('buy-btn')) {
+		addProduct(evt.target);
 	}
-})  
+})
 
 // нажатие кнопки удалить из корзины
-document.querySelector ('.cart-block').addEventListener ('click', (evt) => {
-	if (evt.target.classList.contains ('del-btn')) {
-		removeProduct (evt.target);
+document.querySelector('.cart-block').addEventListener('click', (evt) => {
+	if (evt.target.classList.contains('del-btn')) {
+		removeProduct(evt.target);
 	}
-}) 
+})
+
 
 // функция создает массив запуска функции createProduct для каждого товара
-function fetchData () {
+function fetchData() {
 	let arr = [];
 	items.forEach(item => {
-		arr.push (createProduct (item));
+		arr.push(createProduct(item));
 	});
 	return arr
 }
 
 // функция создания товара(объекта) с соответствующими атрибутами (полями), в т.ч функции создания шаблона верстки
-function createProduct (item) {
+function createProduct(item) {
 	return {
 		id: item.id,
 		name: item.name,
@@ -60,37 +62,36 @@ function createProduct (item) {
 }
 
 //функция размещения созданных товаров в блоке products
-function renderProducts (search = false, items = []) {
+function renderProducts(search = false, items = []) {
 	if (!search) {
 		let arr = [];
 		for (item of list) {
-			arr.push (item.createTemplate ())
+			arr.push(item.createTemplate())
 		}
-		document.querySelector ('.products').innerHTML = arr.join ();
+		document.querySelector('.products').innerHTML = arr.join();
 	} else {
 		let arr = [];
 		items.forEach((item) => {
 			let prod = createProduct(item);
-			console.log(prod);
 			arr.push(prod.createTemplate());
 		});
-		document.querySelector ('.products').innerHTML = arr.join ();
+		document.querySelector('.products').innerHTML = arr.join();
 	}
-	
+
 }
 
 //вызов функции размещения товаров
-renderProducts ();
+renderProducts();
 
 
 //CART
 //функция добавления товара в корзину, если такой товар уже есть, увеличение количества соответствующего товара
-function addProduct (product) {
+function addProduct(product) {
 	let productId = +product.dataset['id'];
-	let find = userCart.find (element => element.id === productId);
+	let find = userCart.find(element => element.id === productId);
 
 	if (!find) {
-		userCart.push ({
+		userCart.push({
 			name: product.dataset['name'],
 			id: productId,
 			img: cartImage,
@@ -100,26 +101,26 @@ function addProduct (product) {
 	} else {
 		find.quantity++
 	}
-	renderCart ();
-}	
+	renderCart();
+}
 
 //фунция удаления товара из корзины 
-function removeProduct (product) {
+function removeProduct(product) {
 	let productId = +product.dataset['id'];
-	let find = userCart.find (element => element.id === productId)
+	let find = userCart.find(element => element.id === productId)
 	//либо find = userCart [?] (obj) || false
 
 	if (find.quantity > 1) {
 		find.quantity--
 	} else {
-		userCart.splice (userCart.indexOf(find), 1);
-		document.querySelector (`.cart-item[data-id="${productId}"]`).remove ()
+		userCart.splice(userCart.indexOf(find), 1);
+		document.querySelector(`.cart-item[data-id="${productId}"]`).remove();
 	}
-	renderCart ();
+	renderCart();
 }
 
 //функция размещения товаров в корзине
-function renderCart () {
+function renderCart() {
 	let allProducts = '';
 	for (item of userCart) {
 		allProducts += `<div class="cart-item" data-id="${item.id}">
@@ -137,6 +138,9 @@ function renderCart () {
                             </div>
                         </div>`
 	}
-	document.querySelector ('.cart-block').innerHTML = allProducts;
+	if (allProducts != ''){
+		allProducts += `<form action ="" class="order-block"><button class="order-btn">оформить заказ</button></form>`;
+	} 
+	document.querySelector('.cart-block').innerHTML = allProducts;
 }
 

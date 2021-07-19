@@ -13,3 +13,14 @@ $('.btn-search').on('click', (e) => {
         }
     });
 });
+$('.btn-default').on('click', (e) => {
+    e.preventDefault();
+    $.ajax({
+        method: "",
+        url: "",
+        data: "",
+        success: () => {
+            renderProducts();
+        }
+    });
+});
