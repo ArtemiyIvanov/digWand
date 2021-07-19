@@ -5,3 +5,7 @@ const PDO_OPTIONS = [
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => TRUE,
     ];
+
+define('VIEWS_FOLDER_PATH', $_SERVER['DOCUMENT_ROOT'].'/views');
+
+define('CACHE_FOLDER_PATH', $_SERVER['DOCUMENT_ROOT'].'/cache');

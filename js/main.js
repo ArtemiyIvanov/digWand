@@ -101,6 +101,7 @@ function addProduct(product) {
 	} else {
 		find.quantity++
 	}
+	console.log(userCart);
 	renderCart();
 }
 
@@ -139,7 +140,7 @@ function renderCart() {
                         </div>`
 	}
 	if (allProducts != ''){
-		allProducts += `<form action ="" class="order-block"><button class="order-btn">оформить заказ</button></form>`;
+		allProducts += `<form action ="/?c=order" class="order-block"><button class="order-btn">оформить заказ</button></form>`;
 	} 
 	document.querySelector('.cart-block').innerHTML = allProducts;
 }

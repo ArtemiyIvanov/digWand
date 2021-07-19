@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'DB_CONNECTION' => env('DB_CONNECTION'),
-    'DB_HOST' => env('DB_HOST'),
-    'DB_PORT' => env('DB_PORT'),
-    'DB_USER' => env('DB_USER'),
-    'DB_PASS' => env('DB_PASS'),
-    'DB_NAME' => env('DB_NAME'),
-    'DB_CHAR' => env('DB_CHAR')
+    'DB_CONNECTION' => get_env('DB_CONNECTION'),
+    'DB_HOST' => get_env('DB_HOST'),
+    'DB_PORT' => get_env('DB_PORT'),
+    'DB_USER' => get_env('DB_USER'),
+    'DB_PASS' => get_env('DB_PASS'),
+    'DB_NAME' => get_env('DB_NAME'),
+    'DB_CHAR' => get_env('DB_CHAR')
 ];

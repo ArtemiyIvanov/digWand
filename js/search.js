@@ -5,7 +5,7 @@ $('.btn-search').on('click', (e) => {
 
     $.ajax({
         method: "POST",
-        url: "search.php",
+        url: "/?a=search",
         data: {searchQuery: field},
         success: (data) => {
             let goods = JSON.parse(data);
