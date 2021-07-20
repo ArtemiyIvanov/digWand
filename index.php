@@ -1,20 +1,18 @@
 <?php
-
 require './vendor/autoload.php';
 
-use App\Controllers\Controller;
-use App\Controllers\Order;
+use App\Controllers\HomeController, App\Controllers\OrderController;
 
 //..ru/?c=controller&a=index
 if (get('c')) {
-    $controllerName = 'App\\Controllers\\' . ucfirst(get('c'));
+    $controllerName = 'App\\Controllers\\' . ucfirst(get('c')) . 'Controller';
     if (class_exists($controllerName)){
 		$controller = new $controllerName();
 	} else{
-		$controller = new Controller();
+		$controller = new HomeController();
 	}
 } else {
-    $controller = new Controller();
+    $controller = new HomeController();
 }
 
 $action = (get('a')) ? get('a') : 'index';

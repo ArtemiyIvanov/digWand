@@ -140,8 +140,25 @@ function renderCart() {
                         </div>`
 	}
 	if (allProducts != ''){
-		allProducts += `<form action="/?c=order&a=index" method = "POST", class="order-block"><button class="order-btn">оформить заказ</button></form>`;
+		allProducts += `<form action="/?c=order&a=index" method = "POST", class="order-block" onsubmit="sendCart(userCart)">
+							<input id="data" type="hidden" name="Cart"/>
+							<button class="order-btn">оформить заказ</button>
+						</form>`;
 	} 
 	document.querySelector('.cart-block').innerHTML = allProducts;
 }
+
+function sendCart(u_cart) {
+	let arCart = [];
+	if (u_cart.length !== 0) {
+		for (item of u_cart) {
+			arCart.push({
+				id: item.id,
+				qty: item.quantity
+			});
+		}
+	}
+	$('#data').val(JSON.stringify(arCart));
+}
+
 
