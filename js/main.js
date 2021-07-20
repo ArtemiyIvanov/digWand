@@ -149,16 +149,16 @@ function renderCart() {
 }
 
 function sendCart(u_cart) {
-	let arCart = [];
-	if (u_cart.length !== 0) {
-		for (item of u_cart) {
-			arCart.push({
-				id: item.id,
-				qty: item.quantity
-			});
-		}
-	}
-	$('#data').val(JSON.stringify(arCart));
+	// let arCart = [];
+	// if (u_cart.length !== 0) {
+	// 	for (item of u_cart) {
+	// 		arCart.push({
+	// 			id: item.id,
+	// 			qty: item.quantity
+	// 		});
+	// 	}
+	// }
+	$('#data').val(JSON.stringify(u_cart));
 }
 
 

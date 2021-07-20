@@ -13,23 +13,22 @@ function getDbParams()
     return require __DIR__.'/database.php';
 }
 
-function get_env(string $key) 
+function get_env($key)
 {
-    return ($_ENV[$key]) ? $_ENV[$key] : false;
+    return (isset($_ENV[$key])) ? $_ENV[$key] : false;
 }
 
-function get(string $key) 
+function get($key)
 {
     return (isset($_GET[$key])) ? $_GET[$key] : false;
 }
 
-function post(string $key) 
+function post($key)
 {
     return (isset($_POST[$key])) ? $_POST[$key] : false;
 }
 function dump($var, $region = false, $right = false)
 {
-	global $USER;
 	$style = '';
 	if($region){
 		$style = 'width:100%;height:100%;overflow:auto;position:fixed;top:120px;'.($right ? 'right' : 'left').':0;max-width:400px;max-height:400px;z-index:1000000;';

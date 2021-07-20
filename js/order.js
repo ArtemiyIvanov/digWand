@@ -1,0 +1,1 @@
+$('.del-btn').on('click', (e) => {    let id = $(e.target).data('id');    $('div[data-id='+id+']').remove();    // $.post(    //     '/?c=order&',    //     {id: id},    //     (response) => {    //    //     }    // )});
