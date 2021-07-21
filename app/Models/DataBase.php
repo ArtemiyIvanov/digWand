@@ -33,10 +33,15 @@ class DataBase {
      * @param array $args
      * @return PDOStatement
      */
-    private static function sql($sql, $args = []) {
+    private static function sql($sql, $args = [], $insertRows = false) {
         $stmt = self::instance()->prepare($sql);
-        $stmt->execute($args);
-        return $stmt;
+        if(!$insertRows) {
+            $stmt->execute($args);
+            return $stmt;
+        } else {
+            return $stmt;
+        }
+
     }
 
     /**
@@ -68,6 +73,22 @@ class DataBase {
     public static function insert($sql, $args = []) {
         self::sql($sql, $args);
         return self::instance()->lastInsertId();
+    }
+
+
+    /**
+     *
+     * @param string $sql
+     * @param array $arRows
+     * @return integer affected rows
+     */
+    public static function insertRows($sql, $arRows) {
+        $stmt = self::sql($sql, [], true);
+
+        foreach ($arRows as $row) {
+            $stmt->execute($row);
+        }
+        return count($arRows);
     }
 
     /**

@@ -5,7 +5,7 @@
 </script>
 @endsection
 
-@section('title', 'Интернет-магазин')
+@section('title', $title)
 
 @section('headerAdditions')
 <div class="cart">
@@ -22,7 +22,9 @@
 @endsection
 
 @section('content')
-    <div class="products"></div> 
+    <div class="products"></div>
+
+
 @endsection
 
 @section('addingJS')

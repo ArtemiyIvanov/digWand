@@ -15,8 +15,9 @@ class HomeController extends Controller_A
 
     public function index()
     {
+        $this->title .= ' | Home';
         $arItems = $this->model->getTableData('items');
-        return $this->render('index', ['arItems' => $arItems]);
+        return $this->render('index', ['title' => $this->title, 'arItems' => $arItems]);
     }
 
     public function search()

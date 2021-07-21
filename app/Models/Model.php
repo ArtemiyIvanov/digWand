@@ -36,28 +36,42 @@ class Model
         return $userBasket;
     }
 
-    public function createOrder($info)
+    public function createOrder($jsonCart, $info)
     {
-//        $info = implode(', ', $info);
+        $fields = implode(', ', array_keys($info));
+        $query = "INSERT INTO orders ($fields) VALUES (:user_phone, :amount)";
+        $order_id = DataBase::insert($query, $info);
 
-        return DataBase::insert(
-            'INSERT INTO orders (user_phone, amount) VALUES (:user_phone, :amount)', $info
-        );
+        $cart = json_decode($jsonCart);
+        $fields = ['order_id', 'item_id', 'qty'];
+
+        $qFields = implode(', ', $fields);
+        $prepareFields = [];
+        foreach ($fields as $field) {
+            $prepareFields[] = ':' . $field;
+        }
+        $qPrepareFields = implode(',', $prepareFields);
+        $cartData = [];
+        foreach ($cart as $el) {
+            $cartData[] = [
+                $fields[0] => $order_id,
+                $fields[1] => $el->item_id,
+                $fields[2] => $el->qty
+            ];
+        }
+        $query = "INSERT INTO orders_items_map ($qFields) VALUES ($qPrepareFields)";
+        DataBase::insertRows($query, $cartData);
+        return $order_id;
+
     }
-
-    public function updateBasket()
-    {
-
-    }
-
 
 
     public function getProductById($ids)
     {
         $query = "SELECT * FROM items WHERE id IN (:ids)";
-        //var_dump($query);
         return DataBase::getRows($query, ['ids' => $ids]);
     }
+
     public function getCartSum($ids, $qty)
     {
         $query = "SELECT price FROM items WHERE id in $ids";
