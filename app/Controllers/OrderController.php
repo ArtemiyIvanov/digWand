@@ -2,16 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\Model, Jenssegers\Blade\Blade;
+use Jenssegers\Blade\Blade;
 
 Class OrderController extends Controller_A
 {
-    public $model;
-
-    public function __construct()
-    {
-        $this->model = new Model;
-    }
     public function index()
     {
         $this->title .= ' | Create Order';
@@ -23,7 +17,8 @@ Class OrderController extends Controller_A
     {
         $info = [
             'user_phone' => post('phone-number'),
-            'amount' => post('amount')
+            'amount' => post('amount'),
+            'date_create' =>  date("Y.m.d")
         ];
         $id = $this->model->createOrder(post('Cart'), $info);
         $this->title .= ' | Order Created';

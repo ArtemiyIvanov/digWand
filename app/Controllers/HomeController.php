@@ -2,16 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\Model, Jenssegers\Blade\Blade;
+use Jenssegers\Blade\Blade;
 
 class HomeController extends Controller_A
 {
-    public $model;
-
-    public function __construct()
-    {
-        $this->model = new Model;
-    }
 
     public function index()
     {

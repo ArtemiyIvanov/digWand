@@ -73,8 +73,16 @@
 @elseif (isset($orderId))
     @section('title', $title)
     @section('content')
-
     <h1>OrderID: {{$orderId}}</h1>
+    <form action="/?c=orderList&a=index" method="POST">
+        <p>Введите номер телефона для просмотра заказов:</p>
+        <p><input type="tel" name="phone-number" placeholder="+7 (900) 123-45-67" value="+7 (900) 123-45-67" ></p>
+    {{--    pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]"--}}
+        <button class="check-btn">Посмотреть</button>
+    </form> </br>
+    <form action="/" method="POST">
+        <button class="check-btn">на главную</button>
+    </form>
     @endsection
 @endif
 

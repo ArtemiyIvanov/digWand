@@ -2,11 +2,18 @@
 
 namespace App\Controllers;
 
-use Jenssegers\Blade\Blade;
+use App\Models\Model, Jenssegers\Blade\Blade;
 
 abstract class Controller_A
 {
     protected $title;
+
+    public $model;
+
+    public function __construct()
+    {
+        $this->model = new Model;
+    }
 
     public function Request($action)
     {
