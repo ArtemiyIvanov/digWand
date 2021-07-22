@@ -16,7 +16,7 @@ Class OrderController extends Controller_A
     public function create()
     {
         $info = [
-            'user_phone' => post('phone-number'),
+            'user_phone' => filter_var(post('phone-number'), FILTER_SANITIZE_NUMBER_INT),
             'amount' => post('amount'),
             'date_create' =>  date("Y.m.d")
         ];

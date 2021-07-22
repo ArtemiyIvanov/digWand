@@ -14,8 +14,10 @@ class Model
 
     public function search($searchQuery)
     {
-        $query = "SELECT * FROM items WHERE name LIKE '%$searchQuery%'";
-        return DataBase::getRows($query);
+        $sq = '%'.$searchQuery.'%';
+        $query = "SELECT * FROM items WHERE name LIKE :searchQuery";
+
+        return DataBase::getRows($query, ['searchQuery' => $sq]);
     }
 
     //related to basket
