@@ -64,28 +64,47 @@ class Model
         return $order_id;
 
     }
-    // related to user
+
+
+    public function getProductById($ids)
+    {
+        $query = "SELECT * FROM items WHERE id IN (:ids)";
+        return DataBase::getRows($query, ['ids' => $ids]);
+    }
+
+    public function getCartSum($ids, $qty)
+    {
+        $query = "SELECT price FROM items WHERE id in $ids";
+        $prices = DataBase::getRows($query);
+        // var_dump($answ);
+        $sum = 0;
+        for ($item = 0; $item < count($qty); $item++){
+            $sum+=(float)$prices[$item]['price']*$qty[$item];
+        }
+        return $sum;
+    }
     public function getUserOrders($number)
     {
-        $query = "SELECT id, amount, date_create FROM orders
+        $query = "SELECT id, amount FROM orders
         where user_phone = (:number)";
-        $orders = [];
+        $OrdersInfo = [];
+        $itemsInOrder =[
+            'id' => 0,
+            'amount' => 0,
+            'itemsInfo' => 0
+        ];
         $ordersByNumber = DataBase::getRows($query, ['number' => $number]);
-
-        $query = "SELECT m.item_id, m.qty, name, price
+        foreach($ordersByNumber as $order) {
+            $query = "SELECT m.item_id, m.qty, name, price
             FROM (orders o INNER JOIN orders_items_map m ON o.id = m.order_id)
             INNER JOIN items i ON i.id = m.item_id
             WHERE m.order_id = (:id)";
-
-        foreach($ordersByNumber as $order) {
-            $orders[] = [
-                'id' => $order['id'],
-                'amount' => $order['amount'],
-                'date_create' => $order['date_create'],
-                'items' => DataBase::getRows($query,['id' => $order['id']])
-            ];
+            $itemsInOrder['id'] = $order['id'];
+            $itemsInOrder['amount'] = $order['amount'];
+            $itemsInOrder['itemsInfo']= DataBase::getRows($query,['id' => $order['id']]);
+            $OrdersInfo[]=$itemsInOrder;
         }
-        return  $orders;
+        return  $OrdersInfo;
     }
-
+    
 }

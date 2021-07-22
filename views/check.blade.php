@@ -19,11 +19,11 @@
             @foreach ($orderList as $order)
                 <div class="row align-items-center">
                     <div class="col">
-                        <p class="order-name">{{$order['id']}}</p>
+                        <p class="order-name">{{$order['date_create']}}</p>
                     </div>
                     <div class="col">
                         <p class="order-name">
-                        @foreach ($order['itemsInfo'] as $item)
+                        @foreach ($order['items'] as $item)
                             {{$item['name'] . ' - ' . $item['price'] . '$ x ' . $item['qty'] . ' = ' . $item['qty'] * $item['price'] . '$'}} </br>
                         @endforeach  
                     </p>
